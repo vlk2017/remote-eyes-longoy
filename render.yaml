@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: remote-eyes-longoy
+    runtime: python
+    plan: free
+    buildCommand: unzip -o source.zip -d app && pip install -r app/requirements.txt
+    startCommand: cd app && uvicorn server.app:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /health
+    envVars:
+      - key: BOT_TOKEN
+        sync: false
+      - key: WEBAPP_BASE_URL
+        sync: false
+      - key: PYTHON_VERSION
+        value: 3.12.8
