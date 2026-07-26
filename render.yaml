@@ -4,7 +4,7 @@ services:
     runtime: python
     plan: free
     buildCommand: unzip -o source.zip -d app; pip install -r app/requirements.txt
-    startCommand: cd app && uvicorn server.app:app --host 0.0.0.0 --port $PORT
+    startCommand: uvicorn server.app:app --app-dir app --host 0.0.0.0 --port $PORT
     healthCheckPath: /health
     envVars:
       - key: BOT_TOKEN
